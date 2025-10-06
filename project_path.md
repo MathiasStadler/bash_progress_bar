@@ -13,7 +13,7 @@
 ## Step 0 - template bash script
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
-cat >template-bash-script.sh <<EoF
+cat >00_template-bash-script.sh <<EoF
 #!/usr/bin/env bash
 #shellcheck shell=bash
 
@@ -25,6 +25,7 @@ cat >template-bash-script.sh <<EoF
 # shfmt --version 3.8.0
 # For more information, see 'man shfmt' and https://github.com/mvdan/sh.
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
+exit 0
 EoF
 ```
 <!-- end of bach code block -->
@@ -39,11 +40,9 @@ mkdir scripts && cd $_
 ## Step 2 - create script progress-bar.sh
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
-cat >bash-progress-bar.sh <<EoF
+cat >01_create_files.sh <<EoF
 #!/usr/bin/env bash
 #shellcheck shell=bash
-
-
 
 # # >> shellcheck -V <<
 # ShellCheck - shell script analysis tool
@@ -53,11 +52,50 @@ cat >bash-progress-bar.sh <<EoF
 # shfmt --version 3.8.0
 # For more information, see 'man shfmt' and https://github.com/mvdan/sh.
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
+
+shopt -s globstar nullglob
+echo 'finding files'
+find . -name '*cache'
+# with all sub directories<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+files=(./**/*cache)
+len=${#files[@]}
+echo  "found $len files"
+exit 0
 EoF
 ```
 <!-- end of bach code block -->
 <!-- ktf -->
-
+## Step 3 - make script executable
+<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+chmod +x scripts/01_create_files.sh
+```
+<!-- end of bach code block -->
+<!-- ktf -->
+## Step 4 - make test files
+<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+cd /tmp
+mkdir playground && cd $_
+mkdir foo bar baz
+touch foo/1.jpg
+touch foo/2.txt
+touch bar/foo-{1..500}-cache.txt # create 500 files
+touch baz/do_not_delete_me.txt 
+```
+<!-- end of bach code block -->
+<!-- ktf -->
+## Step 3 - make script executable
+<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+<!-- end of bach code block -->
+<!-- ktf -->
+## Step 3 - make script executable
+<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+<!-- end of bach code block -->
+<!-- ktf -->
 For further steps, see Project path [![alt text][1]](project_path.md)
 <!-- make folder and download the link sign vai curl -->
 <!-- mkdir -p img && curl --create-dirs --output-dir img -O  "https://raw.githubusercontent.com/MathiasStadler/link_symbol_svg/refs/heads/main/link_symbol.svg"-->

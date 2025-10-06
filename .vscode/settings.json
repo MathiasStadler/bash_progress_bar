@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
+        "globstart",
+        "nullglob",
         "shellcheck",
-        "shfmt"
+        "shfmt",
+        "shopt"
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.tags": [
@@ -12,6 +15,19 @@
         "XXX",
         "[ ]",
         "[x]"
-    ]
-
+    ],
+    "code-runner.fileDirectoryAsCwd": true,
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "php": "C:\\php\\php.exe",
+        "python": "python",
+        "perl": "perl",
+        "ruby": "C:\\Ruby23-x64\\bin\\ruby.exe",
+        "go": "go run",
+        "html": "\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\"",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "shellscript": "cd $dir && sh $fileName",
+        "bash":  "cd $dir && sh $fileName",
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    },
 }
