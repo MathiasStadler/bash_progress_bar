@@ -1,24 +1,63 @@
 # Project path of - Creating an Animated Progress Bar from scratch in Bash to batch-process files [![alt text][1]](https://www.youtube.com/watch?v=U4CzyBXyOms)
 <!-- keep the format ktf-->
+## Use follow extension
+<!-- ktf -->
+- Markdown Code Block Runner [![alt text][1]](https://open-vsx.org/extension/renathossain/markdown-runner)
+- "TODO Tree" [![alt text][1]](https://open-vsx.org/extension/Gruntfuggly/todo-tree)
+<!-- ktf -->
+>[!NOTE]
+> Packages **ripgrep** must already be installed for this [![alt text][1]](https://packages.debian.org/sid/ripgrep)
+<!-- ktf -->
+- "TODO Highlight" [![alt text][1]](https://open-vsx.org/extension/wayou/vscode-todo-highlight)
+
 ## Step 0 - template bash script
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
-cat >>template-bash-script.sh <EOF
+cat >template-bash-script.sh <<EoF
 #!/usr/bin/env bash
 #shellcheck shell=bash
-EOF
+
+# # >> shellcheck -V <<
+# ShellCheck - shell script analysis tool
+# version: 0.10.0
+# >>shellcheck "<SCRIPT-NAME>" <<
+
+# shfmt --version 3.8.0
+# For more information, see 'man shfmt' and https://github.com/mvdan/sh.
+# >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
+EoF
 ```
 <!-- end of bach code block -->
 <!-- ktf -->
-## Step 1 - create template files
+## Step 1 - create script folder
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
-
 mkdir scripts && cd $_
-touch bash-progress-bar.sh
 ```
 <!-- end of bach code block -->
 <!-- ktf -->
+## Step 2 - create script progress-bar.sh
+<!-- start of bach code block -->
+```bash <!-- markdownlint-disable-line code-block-style -->
+cat >bash-progress-bar.sh <<EoF
+#!/usr/bin/env bash
+#shellcheck shell=bash
+
+
+
+# # >> shellcheck -V <<
+# ShellCheck - shell script analysis tool
+# version: 0.10.0
+# >>shellcheck "<SCRIPT-NAME>" <<
+
+# shfmt --version 3.8.0
+# For more information, see 'man shfmt' and https://github.com/mvdan/sh.
+# >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
+EoF
+```
+<!-- end of bach code block -->
+<!-- ktf -->
+
 For further steps, see Project path [![alt text][1]](project_path.md)
 <!-- make folder and download the link sign vai curl -->
 <!-- mkdir -p img && curl --create-dirs --output-dir img -O  "https://raw.githubusercontent.com/MathiasStadler/link_symbol_svg/refs/heads/main/link_symbol.svg"-->
