@@ -10,24 +10,11 @@
 # For more information, see 'man shfmt' and https://github.com/mvdan/sh.
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
 
-progress_bar() {
-    local current=$1
+progress_bar(){
+    local i=$1
     local len=$2
 
-    local perc_done=$((current * 100 / len))
-
-    echo "processing $current/$len ($perc_done%)"
-
-    local s='['
-
-    for ((i = 0; i < perc_done; i++)); do
-        echo "$i/$len"
-        s+='|'
-    done
-    # for ((i = perc_done; i < 100; i++)); do
-    #     s+=' '
-    # done
-
+    echo "processing $i/$len"
 }
 
 shopt -s globstar nullglob
@@ -37,16 +24,16 @@ find . -name '*cache'
 
 files=(./**/*cache.txt)
 len=${#files[@]}
-echo "found $len files"
+echo  "found $len files"
 
 echo "next"
 
 i=0
 for file in "${files[@]}"; do
-    progress_bar "$((i + 1))" "$len"
+    progress_bar "$((i+1))" "$len"
     # echo "$file"
-    ((\
-    i++))
+    ((
+        i++))
 done
 
 exit 0
