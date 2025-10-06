@@ -11,10 +11,22 @@
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
 
 progress_bar(){
-    local i=$1
+    local current=$1
     local len=$2
 
-    echo "processing $i/$len"
+    local perc_done=$((current * 100 / len))
+
+
+    echo "processing $i/$len ($perc_done%)"
+
+    local s='|'
+    
+    echo $s;
+
+    for ((i = 0; i < perc_done;i++ )); do
+         s+='|'
+    done
+
 }
 
 shopt -s globstar nullglob

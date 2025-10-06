@@ -86,18 +86,20 @@ touch baz/do_not_delete_me.txt
 ```
 <!-- end of bach code block -->
 <!-- ktf -->
-## Step 3 - make script executable
+## Step 5 - next step
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
+```
 <!-- end of bach code block -->
 <!-- ktf -->
-## Step 3 - make script executable
+## Step 6 - next step
 <!-- start of bach code block -->
 ```bash <!-- markdownlint-disable-line code-block-style -->
+```
 <!-- end of bach code block -->
 <!-- ktf -->
 For further steps, see Project path [![alt text][1]](project_path.md)
-<!-- make folder and download the link sign vai curl -->
+<!-- make folder and download the link sign via curl -->
 <!-- mkdir -p img && curl --create-dirs --output-dir img -O  "https://raw.githubusercontent.com/MathiasStadler/link_symbol_svg/refs/heads/main/link_symbol.svg"-->
 <!-- Link sign - Don't Found a better way :-( - You know a better method? - **send me a email** -->
 [1]: ./img/link_symbol.svg
