@@ -51,7 +51,11 @@ progress_bar () {
     local d=$((length - num_bars ))
 
     # echo "=> $perc_done"
-    echo "processing $current/$len ($perc_done /$num_bars/$length/$d)"
+
+    #debug
+    #echo "processing $current/$len ($perc_done /$num_bars/$length/$d)"
+    
+    echo "processing $current/$len ($perc_done%)"
     # s output string
     # local s='['
     # for ((i = 0; i < perc_done; i++)); do
@@ -77,8 +81,9 @@ progress_bar () {
 
     s+=$end_char
     
+    #show progress bar right format
     echo "$s"
-    echo "${#s}"
+    # echo "${#s}"
 }
 
 # run function
