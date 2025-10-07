@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 
+
+
 # # >> shellcheck -V <<
 # ShellCheck - shell script analysis tool
 # version: 0.10.0
