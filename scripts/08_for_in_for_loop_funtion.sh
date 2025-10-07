@@ -31,6 +31,10 @@ process-files () {
     sleep .001
 }
 
+clearLastLine() {
+        tput cuu 1 && tput el
+}
+
 progress_bar () {
     local current=$1
     local len=$2
@@ -56,6 +60,8 @@ progress_bar () {
     #echo "processing $current/$len ($perc_done /$num_bars/$length/$d)"
     
     echo "processing $current/$len ($perc_done%)"
+   
+    #echo "processing $current/$len ($perc_done%) \033[0K\r"
     # s output string
     # local s='['
     # for ((i = 0; i < perc_done; i++)); do
@@ -82,7 +88,9 @@ progress_bar () {
     s+=$end_char
     
     #show progress bar right format
-    echo "$s"
+    clearLastLine
+    echo -ne "$s"
+    #echo -ne "[INFO] \033[0K\r"
     # echo "${#s}"
 }
 
