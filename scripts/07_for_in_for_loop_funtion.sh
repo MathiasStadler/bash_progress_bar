@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 
-shopt -s globstar nullglob
+
 
 # # >> shellcheck -V <<
 # ShellCheck - shell script analysis tool
@@ -25,26 +25,57 @@ fn_for_loop () {
     done
 }
 
+process-files () {
+    local files=('$@')
+
+    sleep .001
+}
+
 progress_bar () {
     local current=$1
     local len=$2
 
-    # echo "processing $i/$len"
+    local bar_char='|'
+    local empty_char=' '
+    local start_char='['
+    local end_char=']'
+    local length=50
 
     local perc_done=$((current * 100 / len))
+    local num_bars=$((perc_done * length /100))
 
     # echo "=> $perc_done"
-    # echo "processing $current/$len ($perc_done%)"
+    echo "processing $current/$len ($perc_done /$num_bars/$length   )"
 
     local i
-    for ((i = 0; i < perc_done; i++)); do
-        echo "$i/$len"
-        s+='|'
+    local s+=$start_char
+    # s output string
+    # local s='['
+    # for ((i = 0; i < perc_done; i++)); do
+    #     # echo "$i/$len"
+    #     s+=$bar_char
+    # done
+    for ((i = 0; i < num_bars; i++)); do
+        # echo "$i/$len"
+        s+=$bar_char
     done
+    # for ((i = 0; i < num_bars; i++)); do
+    #     s+=$empty_char
+    # done
+    for ((i = 0; i < length; i++)); do
+        s+=$empty_char
+    done
+
+
+    #echo -ne "$s $current/$len ($perc_done)"
+
+    s+=$end_char
+    echo "$s"
+    echo "${#s}"
 }
 
 # run function
-
+shopt -s globstar nullglob
 run ()  {
 
     echo  "found $len files"
@@ -56,9 +87,12 @@ run ()  {
     # echo "$i"
     # echo "$files"
     progress_bar "$((i+1))" "$len"
+    process-files "${files[@]:1:BATCHSIZE}"
     ((i++))
     done
 }
+
+
 
 main() {
 
