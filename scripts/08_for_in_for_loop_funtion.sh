@@ -37,18 +37,21 @@ progress_bar () {
 
     local bar_char='|'
     local empty_char=' '
-    local start_char='['
+    local start_char='[ '
     local end_char=']'
     local length=30
 
     local perc_done=$((current * 100 / len))
     local num_bars=$((perc_done * length /100))
 
-    # echo "=> $perc_done"
-    echo "processing $current/$len ($perc_done /$num_bars/$length   )"
+    
 
     local i
     local s+=$start_char
+    local d=$((length - num_bars ))
+
+    # echo "=> $perc_done"
+    echo "processing $current/$len ($perc_done /$num_bars/$length/$d)"
     # s output string
     # local s='['
     # for ((i = 0; i < perc_done; i++)); do
@@ -62,14 +65,18 @@ progress_bar () {
     # for ((i = 0; i < num_bars; i++)); do
     #     s+=$empty_char
     # done
-    for ((i = 0; i < length; i++)); do
-        s+=$empty_char
+    # for ((i = 0; i < length; i++)); do
+    #     s+=$empty_char
+    # done
+    for ((i = 0; i < d; i++)); do
+         s+=$empty_char
     done
 
 
     #echo -ne "$s $current/$len ($perc_done)"
 
     s+=$end_char
+    
     echo "$s"
     echo "${#s}"
 }
