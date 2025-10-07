@@ -37,7 +37,7 @@ progress_bar () {
 
     local bar_char='|'
     local empty_char=' '
-    local start_char='[ '
+    local start_char='['
     local end_char=']'
     local length=30
 
