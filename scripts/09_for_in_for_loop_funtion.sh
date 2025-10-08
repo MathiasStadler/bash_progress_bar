@@ -12,6 +12,7 @@
 # For more information, see 'man shfmt' and https://github.com/mvdan/sh.
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
 
+# change to /tmp/playground for run
 cd /tmp/playground || return 0
 
 files=(./**/*cache.txt)
@@ -32,8 +33,8 @@ process-files () {
 }
 
 clearLastLine() {
-        # tput cuu 1 && tput el1
         # FOUND HERE - https://stackoverflow.com/questions/12628327/how-to-show-and-update-echo-on-same-line/12628482#12628482
+        # tput cuu 1 && tput el1
         tput cuu1  && tput el1
 }
 
@@ -125,6 +126,28 @@ run ()  {
     ((i++))
     done
 }
+
+# commands for playground
+init_playground=$(cat <<'EOF'
+# crate/init testcase
+cd /tmp
+mkdir playground && cd $_
+mkdir foo bar baz
+touch foo/1.jpg
+touch foo/2.txt
+touch bar/foo-{1..500}-cache.txt # create 500 files
+touch baz/do_not_delete_me.txt
+ls *
+EOF
+)
+
+# if playground available , if yes delete
+if [ -d "$DIRECTORY" ]; then
+  echo "$DIRECTORY does exist."
+fi
+
+# init/create playground
+bash -c "echo $init_playground"
 
 
 
