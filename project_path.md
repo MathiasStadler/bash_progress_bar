@@ -82,7 +82,8 @@ mkdir foo bar baz
 touch foo/1.jpg
 touch foo/2.txt
 touch bar/foo-{1..500}-cache.txt # create 500 files
-touch baz/do_not_delete_me.txt 
+touch baz/do_not_delete_me.txt
+ls *
 ```
 <!-- end of bach code block -->
 <!-- ktf -->

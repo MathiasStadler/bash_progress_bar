@@ -28,7 +28,7 @@ fn_for_loop () {
 process-files () {
     local files=('$@')
 
-    sleep .001
+    sleep .01
 }
 
 clearLastLine() {
@@ -59,7 +59,8 @@ progress_bar () {
     #debug
     #echo "processing $current/$len ($perc_done /$num_bars/$length/$d)"
     
-    echo "processing $current/$len ($perc_done%)"
+    # LAST PLACE
+    # echo "processing $current/$len ($perc_done%)"
    
     #echo "processing $current/$len ($perc_done%) \033[0K\r"
     # s output string
@@ -87,6 +88,9 @@ progress_bar () {
 
     s+=$end_char
     
+    s+="processing $current/$len ($perc_done%) \n"
+    # echo "processing $current/$len ($perc_done%)"
+
     #show progress bar right format
     clearLastLine
     echo -ne "$s"
