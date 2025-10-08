@@ -4,9 +4,11 @@
         "globstart",
         "nullglob",
         "perc",
+        "PLAYGROUNDFOLDER",
         "shellcheck",
         "shfmt",
-        "shopt"
+        "shopt",
+        "subshell"
     ],
     "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
     "todo-tree.general.tags": [

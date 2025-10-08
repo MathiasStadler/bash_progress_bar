@@ -1,6 +1,34 @@
 #!/usr/bin/env bash
 #shellcheck shell=bash
 
+# FOUND HERE - https://www.geeksforgeeks.org/linux-unix/shell-scripting-set-command/
+# set -x #This option prints the commands in the sequence as they got executed or is mainly used to do some script debugging
+# set -e #It terminates the execution when the error occurs.
+
+# FOUND HERE - https://labex.io/de/tutorials/shell-how-to-handle-unbound-variable-issue-415857
+# Parameter Expansion: ${variable_name}
+# Command Substitution: $(command)
+# Arithmetic Expansion: $((expression))
+
+# FOUND HERE - https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html
+# sot -u / set -o nounset - Treat unset variables and parameters
+# set -e / set -o xtrace - Exit immediately
+# set -E / set -o errtrace - If set, any trap on ERR is inherited by shell functions, command substitutions, and commands executed in a 
+#                            subshell environment. The ERR trap is normally not inherited in such cases
+# set -o pipefail
+
+# found here - https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+# set -eEuo pipefail
+
+# set -Euo pipefail
+ set -Eo pipefail
+
+trap "echo ERR trap fired!" ERR
+
+#set -euxo pipefail
+#set -euxo pipefail
+#set -euxo pipefail
+#set -euxo pipefail
 
 
 # # >> shellcheck -V <<
@@ -12,8 +40,9 @@
 # For more information, see 'man shfmt' and https://github.com/mvdan/sh.
 # >> shfmt -ln=bash --write  "<SCRIPT-NAME>" <<
 
+# OLD PLEASE REMOVE
 # change to /tmp/playground for run
-cd /tmp/playground || return 0
+# cd /tmp/playground || return 0
 
 files=(./**/*cache.txt)
 len=${#files[@]}
@@ -127,32 +156,80 @@ run ()  {
     done
 }
 
+
+setup_playground () {
+
+
+# FOUND HERE - https://stackoverflow.com/questions/7411455/what-does-export-do-in-shell-programming
+# export - It makes the assignment visible to subprocesses 
+# playground_folder
+PLAYGROUND_FOLDER="./playground"
+export PLAYGROUND_FOLDER
+
+# WASTE
+# bash -c "set $PLAYGROUND_FOLDER"
+
+echo "PLAYGROUND => ${PLAYGROUND_FOLDER}"
+# declare $PLAYGROUND_FOLDER
 # commands for playground
 init_playground=$(cat <<'EOF'
 # crate/init testcase
-cd /tmp
-mkdir playground && cd $_
-mkdir foo bar baz
-touch foo/1.jpg
-touch foo/2.txt
-touch bar/foo-{1..500}-cache.txt # create 500 files
-touch baz/do_not_delete_me.txt
-ls *
+cd /tmp && echo "PWD => $PWD"
+# CAN REMOVE echo "${PLAYGROUND_FOLDER} =>"
+# test id file exists
+if [ -d "${PLAYGROUND_FOLDER}" ]; then
+  ### Take action if $DIR exists ###
+  echo "Error: Folder PLAYGROUND =>  ${PLAYGROUND_FOLDER} available. Remove it first - EXIT 1"
+  exit 1
+else
+  ###  Control will jump here if ${PLAYGROUND_FOLDER} does NOT exists ###
+  echo "Folder ${PLAYGROUND_FOLDER} not available. Create it..."
+  mkdir ${PLAYGROUND_FOLDER} && cd $_ && echo "PWD => $PWD"
+  mkdir foo bar baz
+  touch foo/1.jpg
+  touch foo/2.txt
+  touch bar/foo-{1..500}-cache.txt # create 500 files
+  touch baz/do_not_delete_me.txt
+fi
 EOF
 )
 
+
+# init_playground=$(cat <<'EOF'
+# # crate/init testcase
+# cd /tmp
+# echo "$PLAYGROUND_FOLDER"
+# mkdir $PLAYGROUND_FOLDER && cd $_
+# # mkdir foo bar baz
+# # touch foo/1.jpg
+# # touch foo/2.txt
+# # touch bar/foo-{1..500}-cache.txt # create 500 files
+# # touch baz/do_not_delete_me.txt
+# # pwd
+# # cd $PLAYGROUND_FOLDER
+# # ls *
+# EOF
+# )
+
+
 # if playground available , if yes delete
-if [ -d "$DIRECTORY" ]; then
-  echo "$DIRECTORY does exist."
+if [ -d "PLAYGROUND_FOLDER" ]; then
+  echo "PLAYGROUND_FOLDER does exist.";
+  echo "PLEASE remove it first!"
+  exit 1;
+else
+    # init/create playground
+    bash -c "echo $init_playground"
 fi
 
-# init/create playground
-bash -c "echo $init_playground"
+}
+
 
 
 
 main() {
 
+    setup_playground
     run
 
 }
